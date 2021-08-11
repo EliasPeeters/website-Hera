@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <mate charest="utf-8" />
+        <title>Tasks</title>
+    </head>
+    <body>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 5px;
+            width: 50%;
+            border: solid 1px black;
+        }
+
+    </style>
+
+    <h1>Tasks</h1>
+
+    <h4>Convert these numbers from dezimal to binary!</h4>
+    <table>
+        {{#each binaryToDezimal}}
+        <tr>
+                <th>{{this.task}}</th>
+                <th></th>
+        </tr>
+        {{/each}}
+    </table>
+
+    <h4>Convert these numbers from dezimal to binary!</h4>
+    <table>
+        {{#each dezimalToBinary}}
+        <tr>
+                <th>{{this.task}}</th>
+                <th></th>
+        </tr>
+        {{/each}}
+    </table>
+
+  </body>
+</html>
