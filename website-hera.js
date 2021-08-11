@@ -2,6 +2,7 @@ var http = require('https')
   , vm = require('vm')
   , concat = require('concat-stream');
 var pdf = require("pdf-creator-node");
+var pdf = require('html-pdf');
 var fs = require("fs");
 let express = require('express');
 const path = require('path');
@@ -15,13 +16,6 @@ let port = 8084
 var options = {
     format: "A4",
     orientation: "portrait",
-    border: "10mm",
-    header: {
-        height: "0mm",
-    },
-    footer: {
-        height: "28mm"
-    }
 };
 
 var request = require('sync-request');
@@ -31,35 +25,28 @@ let context = {}
 vm.createContext(context)
 vm.runInContext(res, context);
 
+var html = fs.readFileSync("htmlTeamplate.html", "utf8");
+var options = { format: 'A4' };
+
 app.get('/', (request, result) => {
     let name = uuid.uuid()
     let dezimalToBinary = []
     for (let i = 0; i < 10; i++) {
         dezimalToBinary.push(context.dezimalToDual(Math.round(Math.random() * 255)))
     }
-
-    var document = {
-        html: html,
-        data: {
-          dezimalToBinary: dezimalToBinary
-        },
-        path: `pdfs/${name}.pdf`,
-        type: "",
-    };
-
-    pdf.create(document, options).then((res) => {
-        console.log(res);
-        // result.send(res)
-        result.sendFile(path.join(__dirname, '/pdfs', `${name}.pdf`))
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    res.send(dezimalToBinary)
 })
+
+app.use('/assets', express.static('assets'))
+
+pdf.create(html, options).toFile('./assets/test.pdf', function(err, res) {
+    if (err) return console.log(err);
+    console.log(res); // { filename: '/app/businesscard.pdf' }
+  });
 
 app.listen(port, () => {
     console.log(`Running on ${port}`)
 })
 
-var html = fs.readFileSync("htmlTeamplate.html", "utf8");
+
 
