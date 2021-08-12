@@ -57,7 +57,7 @@ app.get('/createpdf', (req, res) => {
     };
 
     let local = 'localhost:8084'
-    let external = 'hera.eliaspeeters.de'
+    let external = 'https://hera.eliaspeeters.de'
     let server = ''
     if (process.env.SERVER == 'local') {
         server = local
