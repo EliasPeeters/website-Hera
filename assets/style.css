@@ -1,0 +1,54 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    width: 50%;
+    border: solid 1px black;
+    font-weight: 400;
+    padding: 5px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.calcBox {
+    width: 70%;
+    margin-left: 15%;
+    position: static;
+}
+
+.calcBox p {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.taskBox {
+    float: left;
+    width: calc(50% - 2px);
+    border: solid 1px black;
+    page-break-after:always;
+}
+
+.number2 {
+    margin-top: -15px;
+}
+
+.calcBox .solution {
+    margin-top: 4px;
+}
+
+.equationSign {
+    margin-top: -40px;
+    margin-right: 200px;
+    text-align: left;
+}
+
+.line {
+    width: 100%;
+    background-color: black;
+    height: 1px;
+}

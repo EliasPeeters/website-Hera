@@ -5,10 +5,12 @@
         <link rel="preconnect" href="https://fonts.googleapis.com"> 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-        <title>Solutions</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+        <title>Tasks</title>
     </head>
     <body>
     <style>
+        
         * {
             font-family: 'Montserrat', sans-serif;
         }
@@ -18,36 +20,95 @@
             border-collapse: collapse;
         }
 
-        th {
-            padding: 5px;
+        td {
             width: 50%;
             border: solid 1px black;
             font-weight: 400;
+            padding: 5px;
+            font-family: 'IBM Plex Mono', monospace;
         }
 
+        .calcBox {
+            width: 70%;
+            margin-left: 15%;
+            position: static;
+        }
+
+        .calcBox p {
+            text-align: right;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .taskBox {
+            float: left;
+            width: calc(50% - 2px);
+            border: solid 1px black;
+            page-break-after:always;
+        }
+
+        .number2 {
+            margin-top: -15px;
+        }
+
+        .calcBox .solution {
+            margin-top: 4px;
+            min-height: 20px;
+        }
+
+        .equationSign {
+            margin-top: -40px;
+            margin-right: 200px;
+            text-align: left;
+        }
+
+        .line {
+            width: 100%;
+            background-color: black;
+            height: 1px;
+        }
     </style>
 
-    <h1>Solutions</h1>
+    <h1>Tasks</h1>
 
     <h4>Convert these numbers from dezimal to binary!</h4>
+    
     <table>
         {{#each binaryToDezimal}}
         <tr>
-                <th>{{this.task}}</th>
-                <th>{{this.solution}}</th>
+            <td>{{this.task}}</td>
+            <td>{{this.solution}}</td>
         </tr>
+        {{/each}}
+    </table>
+    
+
+    <h4>Convert these numbers from dezimal to binary!</h4>
+    
+    <table>
+        {{#each dezimalToBinary}}
+            <tr>
+                <td>{{this.task}}</td>
+                <td>{{this.solution}}</td>
+            </tr>
         {{/each}}
     </table>
 
-    <h4>Convert these numbers from dezimal to binary!</h4>
-    <table>
-        {{#each dezimalToBinary}}
-        <tr>
-            <th>{{this.task}}</th>
-            <th>{{this.solution}}</th>
-        </tr>
+
+    <h4>Calculate in Binary!</h4>
+    <div class="taskWrapper">
+        {{#each binaryAddtion}}
+            <div class="taskBox">
+                <div class="calcBox">
+                    <p>{{this.task.number1}}</p>
+                    <p class="number2">{{this.task.number2}}</p>
+                    <p class="equationSign">+                            </p>
+                    <div class="line"></div>
+                    <p class="solution">{{this.solution}}</p>
+                </div>
+                
+            </div>
         {{/each}}
-    </table>
+    </div>
 
   </body>
 </html>
