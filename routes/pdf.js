@@ -23,6 +23,9 @@ app.get('/createpdf', (req, res) => {
     let binaryToDezimalLength = (req.query.binaryToDezimal != null) ? req.query.binaryToDezimal: 10;
     let dezimalToBinaryLength = (req.query.dezimalToBinary != null) ? req.query.dezimalToBinary: 10;
     let binaryAddtionLength = (req.query.binaryAddition != null) ? req.query.binaryAddition: 10;
+    let tableLength = (req.query.table != null) ? req.query.table: 10;
+
+
     console.log(binaryAddtionLength)
     console.log(req.query)
 
@@ -56,13 +59,50 @@ app.get('/createpdf', (req, res) => {
         })
     }
 
+    let table = []
+    for (let i = 0; i < tableLength; i++) {
+        let task;
+        let solution = ['11','1101','E4','28'];;
+
+        if (i % 4 == 0) {
+
+            task = [Math.round(Math.random() * 255),'','','']; 
+            solution = [task[0], context.dezimalToDual(task[0]), context.decimalToOctal(task[0]), context.decimalToHex(task[0])]
+
+        } else if (i % 4 == 1) {
+
+            task = ['', context.randomDualNumber(2, 10), '', ''];
+            let numberAsDecimal = context.dualToDezimal(task[1]);
+            solution = [numberAsDecimal, task[1], context.decimalToOctal(numberAsDecimal), context.decimalToHex(numberAsDecimal)];
+
+
+        } else if (i % 4 == 2) {
+
+            task = ['','', context.randomOctal(),'']; 
+            let numberAsDecimal = context.octalToDecimal(task[2]);
+            solution = [numberAsDecimal, context.dezimalToDual(numberAsDecimal), task[2], context.decimalToHex(numberAsDecimal)];
+
+        } else if (i % 4 == 3) {
+
+            task = ['', '', '', context.randomHexNumber()];
+            let numberAsDecimal = context.hexToDecimal(task[3]);
+            solution = [numberAsDecimal, context.dezimalToDual(numberAsDecimal), context.decimalToOctal(numberAsDecimal) ,task[3]];
+        }
+        // let solution = ['11','1101','E4','28'];
+        table.push({
+            task: task,
+            solution: solution
+        })
+    }
+
 
     var documentTask = {
         html: htmlTask,
         data: {
             binaryToDezimal: binaryToDezimal,
             dezimalToBinary: dezimalToBinary,
-            binaryAddtion: binaryAddtion
+            binaryAddtion: binaryAddtion,
+            table: table
         },
         path: `./pdfs/${name}Task.pdf`,
         type: "",
@@ -73,7 +113,8 @@ app.get('/createpdf', (req, res) => {
         data: {
             binaryToDezimal: binaryToDezimal,
             dezimalToBinary: dezimalToBinary,
-            binaryAddtion: binaryAddtion
+            binaryAddtion: binaryAddtion,
+            table: table
         },
         path: `./pdfs/${name}Solution.pdf`,
         type: "",

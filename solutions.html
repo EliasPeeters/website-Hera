@@ -28,6 +28,10 @@
             font-family: 'IBM Plex Mono', monospace;
         }
 
+        .tableColumn {
+            width: 25%;
+        }
+
         .calcBox {
             width: 70%;
             margin-left: 15%;
@@ -69,6 +73,25 @@
     </style>
 
     <h1>Tasks</h1>
+
+    <h4>Table</h4>
+    <table>
+        <tr>
+            <td class="tableColumn">Decimal</td>
+            <td class="tableColumn">Binär</td>
+            <td class="tableColumn">Octal</td>
+            <td class="tableColumn">Hexadecimal</td>
+        </tr>
+        {{#each table}}
+        <tr>
+            {{#each this.solution}}
+                <td class="tableColumn">{{this}}</td>
+            {{/each}}
+        </tr>
+        {{/each}}
+    </table>
+
+
 
     <h4>Convert these numbers from dezimal to binary!</h4>
     
